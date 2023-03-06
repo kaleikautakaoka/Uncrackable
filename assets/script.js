@@ -15,8 +15,10 @@ const varscombined = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '!', '@', '#', '$', '%', '^'
 
 //Function to create a password
 function passwordSelection() {
-var selectLength = window.alert("Please select a password length between 15-110")
-var passwordLength = parseInt(selectLength)
+var selectLength = window.prompt("Please select a password length between 15-110")
+var passwordLength = parseInt(selectLength);
+
+//
 }
 
 var generateBtn = document.querySelector("#generate");
