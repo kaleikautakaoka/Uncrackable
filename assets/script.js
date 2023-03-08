@@ -1,31 +1,44 @@
-// Assignment Code: Create a function to generate a random item from the array
+//Variables set to allow for more flexability
+var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?'];
+var lowerCase = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+var upperCase = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
+var varsEmpty = []
 
-function getRandomItem(num) {
-const randomIndex = Math.floor(Math.random() * num.length);
-const item = num[randomIndex];
-
-return item;
+//Function to create password with prompt for selection length and parseInt to convert the string into a number
+function passwordSelection() {
+var selectLength = window.prompt("Please select a password length between 15-90")
+var passwordLength = parseInt(selectLength);
+//if isNan means if its not a number it will prompt user to add a number
+if (isNaN(passwordLength)) {
+  window.alert("Please select a NUMBER between 15-90")
+  return
 }
 
-const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-const symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?'];
-const lowerCase = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
-const upperCase = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
-const varscombined = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
+//If statement to ensure a number is selected between 15-90 otherwise an alert will appear
+if (passwordLength < 15 || passwordLength > 90) {
+    window.alert("Invalid Selection. Please choose a number between 15-90")
+}
+//window.confirm box to confirm selection without text area
+if (passwordLength > 15 || passwordLength < 90) {
+ var addSymbols = window.confirm("Include Symbols?")
+ var addNumbers = window.confirm("Include Numbers?")
+ var addUpperC = window.confirm("Include Upper Case Letters?")
+ var addLowerC = window.confirm("Include Lower Case Letters")
+}
 
-//Function to create a password
-function passwordSelection() {
-var selectLength = window.prompt("Please select a password length between 15-110")
-var passwordLength = parseInt(selectLength);
+if (addSymbols === true) {
+varsEmpty.push(symbols)
+return
+}
 
-//
 }
 
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var pwd = passwordSelection(15, 110);
+  var pwd = passwordSelection(15, 90);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = pwd;
