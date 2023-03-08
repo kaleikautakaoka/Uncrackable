@@ -47,6 +47,7 @@ This project is not licensed
 -[javascript.info](https://javascript.info/structure)
 -[GURU99](https://www.guru99.com/interactive-javascript-tutorials.html)
 -[freecodecamp](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/)
+-[developer.mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
 
 ## Contact
 
