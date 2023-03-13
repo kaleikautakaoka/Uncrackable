@@ -3,8 +3,8 @@ var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?'];
 var lowerCase = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
 var upperCase = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
-//var varsEmpty = [];
-//var varCombined = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
+var varsEmpty = [];
+var varCombined = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 
 //Function to create password with prompt for selection length and parseInt to convert the string into a number
 function passwordSelection() {
@@ -17,7 +17,7 @@ if (isNaN(passwordLength)) {
 }
 
 //If statement to ensure a number is selected between 15-90 otherwise an alert will appear
-if (passwordLength < 15 || passwordLength > 90) {
+if (passwordLength >= 15 || passwordLength < 90) {
     alert("Invalid Selection. Please choose a NUMBER BETWEEN 15 and 90")
     return
 }
@@ -38,70 +38,24 @@ if ( addSymbols === false &&
   return
 }
 
-//Object in leiu of "if" statements
-var options = {
-  passwordLength: passwordLength,
-  addSymbols: addSymbols,
-  addNumbers: addNumbers,
-  addUpperC: addUpperC,
-  addLowerC: addLowerC,
-}
-console.log(options)
-return options
+if (addSymbols === false && 
+  addNumbers === true &&
+  addUpperC === false &&
+  addLowerC === false 
+) {
+Number(numbers.push(numbers))
+return
 }
 
-function random(array) {
-var indexLocation = Math.floor(Math.random()*array.length)
-var indexValue = array[indexLocation]
-return indexValue;
-}
-
-function generatedPwd() {
-  var passwordData = passwordSelection()
-  var gPassword = []
-  var includeV = []
-  var chosenChar = []
-
-  if (passwordData.addSymbols) {
-    includeV = includeV.concat(symbols)
-    chosenChar.push(random(symbols))
-  }
-
-  if (passwordData.addNumbers) {
-    includeV = includeV.concat(numbers)
-    chosenChar.push(random(numbers))
-  }
-
-  if (passwordData.addUpperC) {
-     includeV = includeV.concat(upperCase)
-     chosenChar.push(random(upperCase))
-  }
-
-  if (passwordData.addLowerC) {
-     includeV = includeV.concat(lowerCase)
-     chosenChar.push(random(lowerCase))
-  }
-
-  var generatedPwd = ""
-
-//For loop to run through options and get random list items
- for (var i = 0; i < passwordLength; i++) {
- var chosenCharacters = random(chosenChar);
- generatedPassword.push(chosenCharacters)
-}
-
+var generatedPwd = ""
 return generatedPwd
 }
-
-
-//transffer result into a string ***
-
 
 var generateBtn = document.querySelector("#generate");
 
 //Write password to the #password input
 function writePassword() {
-  var pwd = generatePwd(15, 90);
+  var pwd = passwordSelection();
   var passwordText = document.querySelector("#password");
   passwordText.value = pwd;
 }
