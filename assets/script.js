@@ -3,106 +3,108 @@ var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 var symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?'];
 var lowerCase = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
 var upperCase = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
-var varsEmpty = [];
-var varCombined = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
+//var varsEmpty = [];
+//var varCombined = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '+', '=', '?', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 
 //Function to create password with prompt for selection length and parseInt to convert the string into a number
 function passwordSelection() {
-var selectLength = window.prompt("Please select a password length between 15-90")
-var passwordLength = parseInt(selectLength);
+//var selectLength = prompt("Please select a password length between 15-90")
+var passwordLength = parseInt(prompt("Please select a password length between 15-90"));
 //if isNan means if its not a number it will prompt user to add a number
 if (isNaN(passwordLength)) {
-  var selectLength = window.prompt("Please select a NUMBER between 15-90")
-  var passwordLength = parseInt(selectLength);
-  return
+ alert("Please select a NUMBER between 15-90")
+ return
 }
 
 //If statement to ensure a number is selected between 15-90 otherwise an alert will appear
 if (passwordLength < 15 || passwordLength > 90) {
-    window.prompt("Invalid Selection. Please choose a NUMBER BETWEEN 15 and 90")
-    var passwordLength = parseInt(selectLength);
+    alert("Invalid Selection. Please choose a NUMBER BETWEEN 15 and 90")
     return
 }
-//window.confirm box to confirm selection without text area
-if (passwordLength >= 15 || passwordLength <= 90) {
- var addSymbols = window.confirm("Include Symbols?")
- var addNumbers = window.confirm("Include Numbers?")
- var addUpperC = window.confirm("Include Upper Case Letters?")
- var addLowerC = window.confirm("Include Lower Case Letters")
- return
+
+//confirm box to confirm selection without text area
+ var addSymbols = confirm("Press Ok to include Symbols or cancel to exclude symbols")
+ var addNumbers = confirm("Press Ok to include numbers or cancel to exclude numbers")
+ var addUpperC = confirm("Press Ok to include uppercase or cancel to exclude uppercase")
+ var addLowerC = confirm("Press Ok to include lowercase or cancel to exclude lowercase")
+
+
+if ( addSymbols === false && 
+     addNumbers === false &&
+     addUpperC === false &&
+     addLowerC === false 
+) {
+  alert("Must select an option")
+  return
 }
 
-//If statements execute different options
-if (addSymbols === true) {
-varsEmpty.push(symbols)
+//Object in leiu of "if" statements
+var options = {
+  passwordLength: passwordLength,
+  addSymbols: addSymbols,
+  addNumbers: addNumbers,
+  addUpperC: addUpperC,
+  addLowerC: addLowerC,
+}
+console.log(options)
+return options
 }
 
-if (addSymbols !== true) {
-  numbers.push(upperCase)
+function random(array) {
+var indexLocation = Math.floor(Math.random()*array.length)
+var indexValue = array[indexLocation]
+return indexValue;
 }
 
-if (addNumbers == true) {
-  varsEmpty.push(numbers)
-}
+function generatedPwd() {
+  var passwordData = passwordSelection()
+  var gPassword = []
+  var includeV = []
+  var chosenChar = []
 
-if (addNumbers !== true) {
-  symbols.push(upperCase)
-}
-
-if (addUpperC == true) {
-    varsEmpty.push(upperCase)
-}
-
-if (addUpperC !== true) {
-  numbers.push(lowerCase)
-}
-
-if (addLowerC == true) {
-      varsEmpty.push(lowerCase)
-}
-  
-  if (addLowerC !== true) {
-        numbers.push(upperCase)
-}
-
-if (addLowerC && addUpperC && addNumbers && addSymbols == true) {
-        varCombined.push(upperCase, lowerCase, numbers, symbols)
-}
-var generatedPwd = ""
-//function for random number
-function randomNumber(min, max) {
-  if (!max) {
-    max = min
-    min = 0
+  if (passwordData.addSymbols) {
+    includeV = includeV.concat(symbols)
+    chosenChar.push(random(symbols))
   }
-  var rdm = Math.random();
-  return Math.floor(min*(1-rdm) + rdm*max)
-}
 
-//Function for the for loop
-function randomNum(list) {
-  return list[randomNum(list.length)]
-}
+  if (passwordData.addNumbers) {
+    includeV = includeV.concat(numbers)
+    chosenChar.push(random(numbers))
+  }
+
+  if (passwordData.addUpperC) {
+     includeV = includeV.concat(upperCase)
+     chosenChar.push(random(upperCase))
+  }
+
+  if (passwordData.addLowerC) {
+     includeV = includeV.concat(lowerCase)
+     chosenChar.push(random(lowerCase))
+  }
+
+  var generatedPwd = ""
 
 //For loop to run through options and get random list items
-for (var i = 0; i < passwordLength; i++) {
-  var randomList = randomNum(varCombined);
-  var randomSymbol = randomNum(randomEverything);
-  generatedPwd += randomEverything
+ for (var i = 0; i < passwordLength; i++) {
+ var chosenCharacters = random(chosenChar);
+ generatedPassword.push(chosenCharacters)
 }
+
 return generatedPwd
 }
 
+
+//transffer result into a string ***
+
+
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
+//Write password to the #password input
 function writePassword() {
-  var pwd = passwordSelection(15, 90);
+  var pwd = generatePwd(15, 90);
   var passwordText = document.querySelector("#password");
-
   passwordText.value = pwd;
-
 }
 
-// Add event listener to generate button
+// //Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
